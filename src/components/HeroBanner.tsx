@@ -1,4 +1,4 @@
-import HeroBannerImg from './..assets/images/banner.png';
+import HeroBannerImg from './../assets/images/banner.png';
 import { Box, Typography, Button } from '@mui/material';
 
 const HeroBanner = () => {
