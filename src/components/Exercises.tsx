@@ -23,7 +23,8 @@ const Exercises = ({
   const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage
   const currentExercises = exercises.slice(indexOfFirstExercise, indexOfLastExercise )
 
-  const paginate = (e, value) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const paginate = (value: any) => {
     setCurrentPage(value)
     window.scrollTo({top: 2250, behavior: 'smooth'})
   }
