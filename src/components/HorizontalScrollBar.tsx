@@ -1,5 +1,4 @@
-import Reacta from 'react';
-import { Box, Typography, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import BodyPartCard from './BodyPartCard';
 interface HorizontalScrollBarProps {
   data: never[];
@@ -15,7 +14,6 @@ const HorizontalScrollBar: React.FC<HorizontalScrollBarProps> = ({
   return (
     <Grid container gap={3} maxWidth="fit-content" justifyContent='center'>
         {data.map((item) => (
-          // <Box key={item} itemId={item} title={item}  m="0 40px">
           <Grid item key={item}>
             <BodyPartCard item={item} bodyPart={bodyPart} setBodyPart={setBodyPart} />
           </Grid>
