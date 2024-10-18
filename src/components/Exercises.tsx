@@ -1,40 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import Pagination from '@mui/material/Pagination';
-import { Stack, Box, Typography, Grid } from '@mui/material';
-import { exercises } from '../utils/types';
+import React, { useEffect, useState } from "react";
+import Pagination from "@mui/material/Pagination";
+import { Stack, Box, Typography, Grid } from "@mui/material";
+import { exercises } from "../utils/types";
 
-import { apiOptions, fetchData } from '../utils/fetchData';
-import ExerciseCard from './ExerciseCard';
+import { apiOptions, fetchData } from "../utils/fetchData";
+import ExerciseCard from "./ExerciseCard";
 
 const Exercises = ({
   setExercises,
   exercises,
-  bodyPart
+  bodyPart,
 }: {
   setExercises: React.Dispatch<React.SetStateAction<exercises>>;
   exercises: exercises;
   bodyPart: string;
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const exercisesPerPage = 9;
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const exercisesPerPage = 9
-
-  const indexOfLastExercise = currentPage * exercisesPerPage
-  const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage
-  const currentExercises = exercises.slice(indexOfFirstExercise, indexOfLastExercise )
+  const indexOfLastExercise = currentPage * exercisesPerPage;
+  const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
+  const currentExercises = exercises.slice(
+    indexOfFirstExercise,
+    indexOfLastExercise
+  );
+  console.log(currentExercises);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const paginate = (value: any) => {
-    setCurrentPage(value)
-    window.scrollTo({top: 2250, behavior: 'smooth'})
-  }
+    setCurrentPage(value);
+    window.scrollTo({ top: 2250, behavior: "smooth" });
+  };
 
   useEffect(() => {
     const fetchExercisesData = async () => {
-      let exercisesData = []
-      if (bodyPart === '') {
+      let exercisesData = [];
+      if (bodyPart === "") {
         exercisesData = await fetchData<exercises>(
-          'https://exercisedb.p.rapidapi.com/exercises',
+          "https://exercisedb.p.rapidapi.com/exercises",
           apiOptions
         );
       } else {
@@ -44,45 +47,44 @@ const Exercises = ({
         );
       }
 
-      setExercises(exercisesData)
-    }
+      setExercises(exercisesData);
+    };
 
-    fetchExercisesData()
-    
-  },[bodyPart, setExercises])
+    fetchExercisesData();
+  }, [bodyPart, setExercises]);
 
   return (
-    <Box id="exercises" sx={{ mt: { lg: '110px' } }} mt="50px" p="20px">
+    <Box id="exercises" sx={{ mt: { lg: "110px" } }} mt="50px" p="20px">
       <Typography variant="h3" mb="46px">
         Showing Results
       </Typography>
       {/* <Stack
         direction="row"
-        sx={{ gap: { lg: '110px', xs: '50px' } }}
+        sx={{ gap: { lg: "110px", xs: "50px" } }}
         flexWrap="wrap"
         justifyContent="center"
       >
         {currentExercises.map((exercise) => (
-          <ExerciseCard key={exercise.id} exercise={exercise}/>
+          <ExerciseCard key={exercise.id} exercise={exercise} />
         ))}
       </Stack> */}
-      <Grid container gap={3} maxWidth="fit-content" justifyContent='center'>
+      <Grid container gap={3} maxWidth="fit-content" justifyContent="center">
         {currentExercises.map((exercise) => (
           <Grid item key={exercise.id}>
-            <ExerciseCard key={exercise.id} exercise={exercise}/>
+            <ExerciseCard key={exercise.id} exercise={exercise} />
           </Grid>
         ))}
-    </Grid>
-      <Stack mt='100px' alignItems='center'>
-        {exercises.length > 9 && (
+      </Grid>
+      <Stack mt="100px" alignItems="center">
+        {exercises.length > 10 && (
           <Pagination
             color="standard"
-            shape='rounded'
+            shape="rounded"
             defaultPage={1}
-            count={Math.ceil(exercises.length/exercisesPerPage)}
+            count={Math.ceil(exercises.length / exercisesPerPage)}
             page={currentPage}
             onChange={paginate}
-            size='large'
+            size="large"
           />
         )}
       </Stack>
