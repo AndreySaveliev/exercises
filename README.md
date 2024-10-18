@@ -2,7 +2,7 @@
 
 ##### Этот сайт поможет вам подобрать нужное упражнение, расскажет на кикие группы мышц оно воздействует, предложит видео урок, в котором демонстрируется прапвильное исполнение упражнения
 
-## Сcылка на деплой [Vercel](exercises-a63hts4qt-andreysavelievs-projects.vercel.app)
+## Сcылка на деплой [Vercel](https://exercises-theta.vercel.app/)
 ____
 
 ![screen1](https://github.com/user-attachments/assets/5840ec33-1232-4b1f-97b6-5fd00f421cac)
